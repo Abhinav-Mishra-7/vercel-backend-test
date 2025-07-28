@@ -21,8 +21,8 @@ const http = require('http');
 const {initSocket} = require("./config/socketManager") ;
 
 // Checking for expiry of premium
-const { checkPremiumExpiry } = require('./utils/cronJobs');
-checkPremiumExpiry();
+// const { checkPremiumExpiry } = require('./utils/cronJobs');
+// checkPremiumExpiry();
 // ******
 
 // CORS -> Cross Origin Resource Sharing
