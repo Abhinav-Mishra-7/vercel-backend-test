@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 require("dotenv").config() ;
+const main = require("./config/db") ;
+const redisClient = require("./config/redis");
 
 const PORT = process.env.PORT || 5000;
 
