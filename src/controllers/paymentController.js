@@ -1,6 +1,6 @@
 const crypto = require('crypto');
 const User = require('../models/user');
-const Payment = require('../models/Payment');
+const Payment = require('../models/payment');
 const razorpay = require("../config/razorpay") ;
 
 const PLANS = {
