@@ -46,6 +46,12 @@ app.use(cors({
 app.use(express.json()) ;
 app.use(cookieParser()) ;
 
+// Using socket to handle the real time changes
+const server = http.createServer(app);
+const io = initSocket(server);
+
+app.set('socketio' , io) ;
+
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}. This log will NOT appear on Vercel.`);
 });
