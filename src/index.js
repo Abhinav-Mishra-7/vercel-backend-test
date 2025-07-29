@@ -36,6 +36,12 @@ app.get('/api/test', (req, res) => {
   res.status(200).json({ message: 'The test API route is working!' });
 });
 
+// Adding CORS to handle cross platform problem
+app.use(cors({
+    origin: " http://localhost:5173" ,
+    credentials: true
+}))
+
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}. This log will NOT appear on Vercel.`);
 });
