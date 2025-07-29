@@ -58,6 +58,10 @@ app.use("/user" , authRouter) ;
 app.use("/problem" , problemRouter) ; 
 // runCode , submitCode
 app.use("/submission" , submitRouter) ;
+// AI chat bot
+app.use('/ai' , aiRouter) ;
+// email verification
+app.use('/api' , emailRouter) ;
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}. This log will NOT appear on Vercel.`);
