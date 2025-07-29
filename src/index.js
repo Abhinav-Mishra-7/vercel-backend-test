@@ -54,6 +54,8 @@ app.set('socketio' , io) ;
 // Dealing with Routes
 // Register , login , logout , adminRegister , deleteProfile
 app.use("/user" , authRouter) ;
+// create , update , delete , getProblem , getAllProblem 
+app.use("/problem" , problemRouter) ; 
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}. This log will NOT appear on Vercel.`);
