@@ -40,32 +40,32 @@ app.get('/', (req, res) => {
 });
 
 
-const server = http.createServer(app);
-const io = initSocket(server);
+// const server = http.createServer(app);
+// const io = initSocket(server);
 
-app.set('socketio' , io) ;
+// app.set('socketio' , io) ;
 
 // Dealing with Routes
 // Register , login , logout , adminRegister , deleteProfile
-app.use("/user" , authRouter) ;
-// create , update , delete , getProblem , getAllProblem 
-app.use("/problem" , problemRouter) ; 
-// runCode , submitCode
-app.use("/submission" , submitRouter) ;
-// AI chat bot
-app.use('/ai' , aiRouter) ;
-// email verification
-app.use('/api' , emailRouter) ;
-// Video creator
-app.use('/video' , videoRouter) ;
-// Comment
-app.use("/comment" , commentRoutes) ;
-// contest router
-app.use("/contest" , contestRouter) ;
-// payment route
-app.use("/payments" , paymentRouter) ;
-// profile image
-app.use("/image" , imageRouter) ;
+// app.use("/user" , authRouter) ;
+// // create , update , delete , getProblem , getAllProblem 
+// app.use("/problem" , problemRouter) ; 
+// // runCode , submitCode
+// app.use("/submission" , submitRouter) ;
+// // AI chat bot
+// app.use('/ai' , aiRouter) ;
+// // email verification
+// app.use('/api' , emailRouter) ;
+// // Video creator
+// app.use('/video' , videoRouter) ;
+// // Comment
+// app.use("/comment" , commentRoutes) ;
+// // contest router
+// app.use("/contest" , contestRouter) ;
+// // payment route
+// app.use("/payments" , paymentRouter) ;
+// // profile image
+// app.use("/image" , imageRouter) ;
 
 
 
