@@ -1,24 +1,24 @@
 const express = require("express") ;
 const app = express() ;
-require("dotenv").config() ;
+// require("dotenv").config() ;
 
-const main = require("./config/db") ;
-const redisClient = require("./config/redis");
+// const main = require("./config/db") ;
+// const redisClient = require("./config/redis");
 
 const cookieParser = require("cookie-parser") ;
-const authRouter = require("./routes/userAuth") ;
-const problemRouter = require("./routes/problemCreator");
-const submitRouter = require("./routes/submit");
+// const authRouter = require("./routes/userAuth") ;
+// const problemRouter = require("./routes/problemCreator");
+// const submitRouter = require("./routes/submit");
 const cors = require("cors") ;
-const aiRouter = require("./routes/aiChatting") ;
-const emailRouter = require("./routes/emailVerify") ;
-const videoRouter = require("./routes/videoCreator") ;
-const contestRouter = require("./routes/contestRoute") ;
-const paymentRouter = require("./routes/paymentRoutes") ;
-const commentRoutes = require("./routes/commentRoutes") ;
-const imageRouter = require("./routes/userImage") ;
-const http = require('http');
-const {initSocket} = require("./config/socketManager") ;
+// const aiRouter = require("./routes/aiChatting") ;
+// const emailRouter = require("./routes/emailVerify") ;
+// const videoRouter = require("./routes/videoCreator") ;
+// const contestRouter = require("./routes/contestRoute") ;
+// const paymentRouter = require("./routes/paymentRoutes") ;
+// const commentRoutes = require("./routes/commentRoutes") ;
+// const imageRouter = require("./routes/userImage") ;
+// const http = require('http');
+// const {initSocket} = require("./config/socketManager") ;
 
 // Checking for expiry of premium
 // const { checkPremiumExpiry } = require('./utils/cronJobs');
