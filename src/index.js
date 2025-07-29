@@ -3,6 +3,21 @@ const app = express();
 require("dotenv").config() ;
 const main = require("./config/db") ;
 const redisClient = require("./config/redis");
+const cookieParser = require("cookie-parser") ;
+const cors = require("cors") ;
+
+const authRouter = require("./routes/userAuth") ;
+const problemRouter = require("./routes/problemCreator");
+const submitRouter = require("./routes/submit");
+const aiRouter = require("./routes/aiChatting") ;
+const emailRouter = require("./routes/emailVerify") ;
+const videoRouter = require("./routes/videoCreator") ;
+const contestRouter = require("./routes/contestRoute") ;
+const paymentRouter = require("./routes/paymentRoutes") ;
+const commentRoutes = require("./routes/commentRoutes") ;
+const imageRouter = require("./routes/userImage") ;
+const http = require('http');
+const {initSocket} = require("./config/socketManager") ;
 
 const PORT = process.env.PORT || 5000;
 
