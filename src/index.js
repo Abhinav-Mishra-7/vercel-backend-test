@@ -96,6 +96,8 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
+app.use(express.json()) ;
+
 // This log will appear the moment the server file is loaded by Vercel
 console.log('Server file has been loaded by Vercel.');
 
