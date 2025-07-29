@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 require("dotenv").config() ;
-const main = require("./config/db") ;
-const redisClient = require("./config/redis");
+
+const PORT = process.env.PORT || 5000;
 
 // This log will appear the moment the server file is loaded by Vercel
 console.log('Server file has been loaded by Vercel.');
@@ -19,21 +19,6 @@ app.get('/api/test', (req, res) => {
   res.status(200).json({ message: 'The test API route is working!' });
 });
 
-const initializeConnection = async ()=>{
-
-    try{
-        // await Promise.all([main() , redisClient.connect()]) ;
-        // console.log("DB Connected") ;
-        const PORT = process.env.PORT;
-        server.listen(PORT, () => {
-            console.log(`Server listening at http://localhost:${PORT}`);
-        });
-    }
-    catch(err)
-    {
-        console.log("Error : " + err) ;
-    }
-}
-
-
-initializeConnection() ;
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}. This log will NOT appear on Vercel.`);
+});
