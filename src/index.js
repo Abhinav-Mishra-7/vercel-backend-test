@@ -42,6 +42,10 @@ app.use(cors({
     credentials: true
 }))
 
+// Parsing the cookie and json format data coming from frontend
+app.use(express.json()) ;
+app.use(cookieParser()) ;
+
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}. This log will NOT appear on Vercel.`);
 });
