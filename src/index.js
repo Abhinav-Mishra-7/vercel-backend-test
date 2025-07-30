@@ -3,6 +3,10 @@ const app = express();
 require("dotenv").config() ;
 const main = require("./config/db") ;
 const redisClient = require("./config/redis");
+// Using socket to handle the real time changes
+const server = http.createServer(app);
+const io = initSocket(server);
+app.set('socketio' , io) ;
 
 // parallely calling two function to connent DB and redis both at the same time
 const initializeConnection = async ()=>{
@@ -39,8 +43,6 @@ const imageRouter = require("./routes/userImage") ;
 const http = require('http');
 const {initSocket} = require("./config/socketManager") ;
 
-// const PORT = process.env.PORT || 5000;
-
 // This log will appear the moment the server file is loaded by Vercel
 console.log('Server file has been loaded by Vercel.');
 
@@ -66,11 +68,6 @@ app.use(cors({
 app.use(express.json()) ;
 app.use(cookieParser()) ;
 
-// Using socket to handle the real time changes
-const server = http.createServer(app);
-const io = initSocket(server);
-app.set('socketio' , io) ;
-
 // Dealing with Routes
 // Register , login , logout , adminRegister , deleteProfile
 app.use("/user" , authRouter) ;
@@ -92,9 +89,5 @@ app.use("/contest" , contestRouter) ;
 app.use("/payments" , paymentRouter) ;
 // profile image
 app.use("/image" , imageRouter) ;
-
-// app.listen(PORT, () => {
-//   console.log(`Server is listening on port ${PORT}. This log will NOT appear on Vercel.`);
-// });
 
 module.exports = app ;
