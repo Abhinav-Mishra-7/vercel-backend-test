@@ -4,21 +4,6 @@ require("dotenv").config() ;
 const main = require("./config/db") ;
 const redisClient = require("./config/redis");
 
-// parallely calling two function to connent DB and redis both at the same time
-const initializeConnection = async ()=>{
-
-    try{
-        await Promise.all([main() , redisClient.connect()]) ;
-        console.log("DB Connected") ;
-    }
-    catch(err)
-    {
-        console.log("Error : " + err) ;
-    }
-}
-initializeConnection() ;
-
-
 const cookieParser = require("cookie-parser") ;
 const cors = require("cors") ;
 
@@ -55,6 +40,21 @@ app.use(cors({
     origin: process.env.FRONTEND_URL ,
     credentials: true
 }))
+
+// parallely calling two function to connent DB and redis both at the same time
+const initializeConnection = async ()=>{
+
+    try{
+        await Promise.all([main() , redisClient.connect()]) ;
+        console.log("DB Connected") ;
+    }
+    catch(err)
+    {
+        console.log("Error : " + err) ;
+    }
+}
+initializeConnection() ;
+
 
 // Using socket to handle the real time changes
 const server = http.createServer(app);
