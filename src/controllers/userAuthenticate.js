@@ -201,7 +201,11 @@ const deleteProfile = async(req,res)=>{
 const googleLogin = async (req, res) => {
     try {
         const { token } = req.body;
-        console.log(token) ;
+
+        if (!token) {
+            return res.status(400).json({ message: 'Google token is required.' });
+        }
+
         const ticket = await client.verifyIdToken({
             idToken: token,
             audience: process.env.GOOGLE_CLIENT_ID,
@@ -210,8 +214,6 @@ const googleLogin = async (req, res) => {
         const { given_name, family_name, email } = payload;
 
         let user = await User.findOne({ emailId: email });
-
-        // console.log(user) ;
 
         if (!user) {
             // Generate random password for Google users
@@ -241,7 +243,8 @@ const googleLogin = async (req, res) => {
             emailId: user.emailId,
             _id: user._id,
             role: user.role,
-            verified: user.verified
+            verified: user.verified ,
+            profilePicUrl: user.profilePicUrl
         };
 
         res.status(200).json({
