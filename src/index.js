@@ -64,6 +64,8 @@ app.use('/ai' , aiRouter) ;
 app.use('/api' , emailRouter) ;
 // Video creator
 app.use('/video' , videoRouter) ;
+// Comment
+app.use("/comment" , commentRoutes) ;
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}. This log will NOT appear on Vercel.`);
