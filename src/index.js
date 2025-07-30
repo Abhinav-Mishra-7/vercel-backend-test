@@ -81,12 +81,17 @@ app.use("/image" , imageRouter) ;
 const initializeConnection = async ()=>{
 
     try{
-        await Promise.all([main() , redisClient.connect()]) ;
-        console.log("DB Connected") ;
-        const PORT = process.env.PORT;
-        server.listen(PORT, () => {
-            console.log(`Server listening at http://localhost:${PORT}`);
-        });
+        // await Promise.all([main() , redisClient.connect()]) ;
+        // console.log("DB Connected") ;
+        // const PORT = process.env.PORT;
+        // server.listen(PORT, () => {
+        //     console.log(`Server listening at http://localhost:${PORT}`);
+        // });
+      await main() ;
+      const PORT = process.env.PORT ;
+      app.listen(PORT , ()=>{
+        console.log(`Server listening at http://localhost:${PORT}`);
+      })
     }
     catch(err)
     {
