@@ -66,6 +66,12 @@ app.use('/api' , emailRouter) ;
 app.use('/video' , videoRouter) ;
 // Comment
 app.use("/comment" , commentRoutes) ;
+// contest router
+app.use("/contest" , contestRouter) ;
+// payment route
+app.use("/payments" , paymentRouter) ;
+// profile image
+app.use("/image" , imageRouter) ;
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}. This log will NOT appear on Vercel.`);
