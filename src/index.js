@@ -3,6 +3,26 @@ const app = express();
 require("dotenv").config() ;
 const main = require("./config/db") ;
 const redisClient = require("./config/redis");
+
+// parallely calling two function to connent DB and redis both at the same time
+const initializeConnection = async ()=>{
+
+    try{
+        await Promise.all([main() , redisClient.connect()]) ;
+        console.log("DB Connected") ;
+        const PORT = process.env.PORT;
+        server.listen(PORT, () => {
+            console.log(`Server listening at http://localhost:${PORT}`);
+        });
+    }
+    catch(err)
+    {
+        console.log("Error : " + err) ;
+    }
+}
+initializeConnection() ;
+
+
 const cookieParser = require("cookie-parser") ;
 const cors = require("cors") ;
 
@@ -77,27 +97,4 @@ app.use("/image" , imageRouter) ;
 //   console.log(`Server is listening on port ${PORT}. This log will NOT appear on Vercel.`);
 // });
 
-// parallely calling two function to connent DB and redis both at the same time
-const initializeConnection = async ()=>{
-
-    try{
-        // await Promise.all([main() , redisClient.connect()]) ;
-        // console.log("DB Connected") ;
-        // const PORT = process.env.PORT;
-        // server.listen(PORT, () => {
-        //     console.log(`Server listening at http://localhost:${PORT}`);
-        // });
-      await main() ;
-      const PORT = process.env.PORT ;
-      app.listen(PORT , ()=>{
-        console.log(`Server listening at http://localhost:${PORT}`);
-      })
-    }
-    catch(err)
-    {
-        console.log("Error : " + err) ;
-    }
-}
-
-
-initializeConnection() ;
+module.exports = app ;
