@@ -21,6 +21,7 @@ authRouter.delete('/deleteProfile' , userMiddleware , deleteProfile) ;
 // Google authentication
 authRouter.post('/google' , googleLogin) ;
 
+
 authRouter.get('/subscription-status' , userMiddleware , getSubscriptionStatus)
 
 authRouter.get("/check" , userMiddleware , (req,res)=>{
