@@ -3,10 +3,6 @@ const app = express();
 require("dotenv").config() ;
 const main = require("./config/db") ;
 const redisClient = require("./config/redis");
-// Using socket to handle the real time changes
-const server = http.createServer(app);
-const io = initSocket(server);
-app.set('socketio' , io) ;
 
 // parallely calling two function to connent DB and redis both at the same time
 const initializeConnection = async ()=>{
@@ -63,6 +59,12 @@ app.use(cors({
     origin: " http://localhost:5173" ,
     credentials: true
 }))
+
+// Using socket to handle the real time changes
+const server = http.createServer(app);
+const io = initSocket(server);
+app.set('socketio' , io) ;
+
 
 // Parsing the cookie and json format data coming from frontend
 app.use(express.json()) ;
