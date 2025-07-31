@@ -100,7 +100,7 @@ const login = async(req,res)=>{
         }
         
         // Storing cookie
-        res.cookie('token' , token , {maxAge: 24*60*60*1000}) ;
+        res.cookie('token' , token , {maxAge: 24*60*60*1000 , httpOnly: true , secure: true , sameSite: 'none'}) ;
 
         res.status(201).json({
             user: reply ,
