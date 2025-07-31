@@ -1,12 +1,30 @@
 const express = require('express');
 const app = express();
 require("dotenv").config() ;
+const cookieParser = require("cookie-parser") ;
+const cors = require("cors") ;
+const http = require('http');
+
+// Adding CORS to handle cross platform problem
+app.use(cors({
+    origin: process.env.FRONTEND_URL ,
+    credentials: true
+}))
+
+// Parsing the cookie and json format data coming from frontend
+app.use(express.json()) ;
+app.use(cookieParser()) ;
+
 const main = require("./config/db") ;
 const redisClient = require("./config/redis");
 
-const cookieParser = require("cookie-parser") ;
-const cors = require("cors") ;
+// Using socket to handle the real time changes
+const {initSocket} = require("./config/socketManager") ;
+const server = http.createServer(app);
+const io = initSocket(server);
+app.set('socketio' , io) ;
 
+// Route Definitions
 const authRouter = require("./routes/userAuth") ;
 const problemRouter = require("./routes/problemCreator");
 const submitRouter = require("./routes/submit");
@@ -17,11 +35,6 @@ const contestRouter = require("./routes/contestRoute") ;
 const paymentRouter = require("./routes/paymentRoutes") ;
 const commentRoutes = require("./routes/commentRoutes") ;
 const imageRouter = require("./routes/userImage") ;
-const http = require('http');
-const {initSocket} = require("./config/socketManager") ;
-
-// This log will appear the moment the server file is loaded by Vercel
-console.log('Server file has been loaded by Vercel.');
 
 app.get('/', (req, res) => {
   // This log will appear only if a request successfully reaches this route
@@ -35,11 +48,6 @@ app.get('/api/test', (req, res) => {
   res.status(200).json({ message: 'The test API route is working!' });
 });
 
-// Adding CORS to handle cross platform problem
-app.use(cors({
-    origin: process.env.FRONTEND_URL ,
-    credentials: true
-}))
 
 // parallely calling two function to connent DB and redis both at the same time
 const initializeConnection = async ()=>{
@@ -56,15 +64,6 @@ const initializeConnection = async ()=>{
 initializeConnection() ;
 
 
-// Using socket to handle the real time changes
-const server = http.createServer(app);
-const io = initSocket(server);
-app.set('socketio' , io) ;
-
-
-// Parsing the cookie and json format data coming from frontend
-app.use(express.json()) ;
-app.use(cookieParser()) ;
 
 // Dealing with Routes
 // Register , login , logout , adminRegister , deleteProfile
