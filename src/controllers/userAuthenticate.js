@@ -14,7 +14,7 @@ const register = async(req,res)=>{
     try{
 
         // Validate for valid emailId and password using validator
-        validate(req.body) ;
+        // validate(req.body) ;
 
         const firstName = req.body.firstName ;
         const emailId = req.body.emailId ;
